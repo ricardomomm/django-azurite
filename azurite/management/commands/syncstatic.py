@@ -79,7 +79,6 @@ class Command(BaseCommand):
                 for blob in self.service.list_blobs(self.STATIC_CONTAINER):
                     self.service.delete_blob(self.STATIC_CONTAINER, blob.name)
 
-        print "Enviando para o dir %s" % self.DIRECTORY
         # walk through the directory, creating or updating files on the cloud
         os.path.walk(self.DIRECTORY, self.upload_files, "foo")
 
