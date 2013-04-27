@@ -86,7 +86,7 @@ class AzureStorage(Storage):
         else:
             content_str = content.read()
         self._get_service().put_blob(self.container, name, content_str,
-            'BlockBlob', , x_ms_blob_content_type=content_type,
+            'BlockBlob', x_ms_blob_content_type=content_type,
                     content_encoding=encoding)
         content.close()
 
