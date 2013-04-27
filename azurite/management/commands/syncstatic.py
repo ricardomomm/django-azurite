@@ -79,6 +79,7 @@ class Command(BaseCommand):
                 for blob in self.service.list_blobs(self.STATIC_CONTAINER):
                     self.service.delete_blob(self.STATIC_CONTAINER, blob.name)
 
+        print "Enviando para o dir %s" % self.DIRECTORY
         # walk through the directory, creating or updating files on the cloud
         os.path.walk(self.DIRECTORY, self.upload_files, "foo")
 
@@ -130,6 +131,8 @@ class Command(BaseCommand):
             if not self.test_run:
                 file_contents = open(file_path, 'r').read()
                 content_type, encoding = mimetypes.guess_type(file_path)
+                print "content-type", content_type
+                print "encoding", encoding
                 self.service.put_blob(self.STATIC_CONTAINER, object_name, file_contents,
                     x_ms_blob_type='BlockBlob', x_ms_blob_content_type=content_type,
                     content_encoding=encoding)
