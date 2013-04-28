@@ -79,7 +79,8 @@ class AzureStorage(Storage):
         (called ``name``).
         """
         content.open()
-        content_type, encoding = mimetypes.guess_type(content.file)
+        content_type, encoding = mimetypes.guess_type(content.name)
+        encoding = encoding or 'utf-8' #default to utf-8
 
         if hasattr(content, 'chunks'):
             content_str = ''.join(chunk for chunk in content.chunks())
